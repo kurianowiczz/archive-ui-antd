@@ -1,0 +1,9 @@
+.header {
+    display: grid !important;
+    grid-template-columns: 1fr max-content;
+    padding: 16px 20px !important;
+    background: #fff !important;
+    align-items: center;
+    line-height: unset !important;
+
+}

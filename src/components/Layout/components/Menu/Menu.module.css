@@ -1,0 +1,18 @@
+.btn {
+    width: 100%;
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: grid !important;
+    padding-left: 32px !important;
+    grid-template-columns: max-content max-content;
+    align-items: center;
+}
+
+.slider {
+    width: max-content;
+}
+
+.collapsedSlider {
+    width: 80px !important;
+}
