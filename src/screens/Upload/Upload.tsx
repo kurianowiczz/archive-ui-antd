@@ -2,8 +2,8 @@ import React, { useCallback } from 'react';
 import Layout from '../../components/Layout/Layout';
 
 import styles from './Upload.module.css';
-import { Input, Button } from 'antd';
-import { Upload, Icon } from 'antd';
+import { Button } from 'antd';
+import { Upload } from 'antd';
 const { Dragger } = Upload;
 
 const UploadFile: React.FC = () => {
