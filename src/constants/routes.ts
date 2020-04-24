@@ -16,6 +16,10 @@ const Routes = {
         role: 'user',
         icon: 'signin',
         label: 'Signin'
+    },
+    ACCOUNT: {
+        path: '/account',
+        role: 'User',
     }
 
 };

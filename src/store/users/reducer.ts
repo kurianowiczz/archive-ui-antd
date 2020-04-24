@@ -1,6 +1,6 @@
 import { handleActions, Action } from 'redux-actions';
 
-import { register, registerSuccess, handleError } from './actions';
+import { register, registerSuccess, login, loginSuccess, handleError, logOut } from './actions';
 import IUser from '../../interfaces/IUser';
 import IServerError from '../../interfaces/IServerError';
 
@@ -29,6 +29,14 @@ export default handleActions<IUserState, any>(
             state,
             { payload }: Action<{ error: IServerError }>
         ) => ({ ...DEFAULT_STATE, error: payload.error }),
+        [login.toString()]: (state) => ({ ...state, isLoading: true }),
+        [loginSuccess.toString()]: (
+            state,
+            { payload }: Action<{ user: IUser; token: string }>
+        ) => ({ error: null, isLoading: false, user: payload.user, token: payload.token }),
+        [logOut.toString()]: () => ({
+            ...DEFAULT_STATE
+        })
     },
     DEFAULT_STATE,
 );

@@ -34,6 +34,6 @@ const Layout: React.FC = ({ children }) => {
         </AntLayout>
       </AntLayout>
     );
-}
+};
 
 export default Layout;

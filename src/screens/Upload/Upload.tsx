@@ -7,7 +7,6 @@ import { Upload } from 'antd';
 const { Dragger } = Upload;
 
 const UploadFile: React.FC = () => {
-
     const onFileUploadChange = useCallback((info) => {
         const { status } = info.file;
         if (status !== 'uploading') {
@@ -24,7 +23,7 @@ const UploadFile: React.FC = () => {
         <Layout>
         <section>
             <p>Title</p>
-            <Dragger onChange={onFileUploadChange}></Dragger>
+            <Dragger onChange={onFileUploadChange}/>
             <Button type="primary" className={styles.btn}>Upload</Button>
         </section>
         </Layout>

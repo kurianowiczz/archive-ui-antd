@@ -5,11 +5,15 @@ export const {
     registerSuccess,
     login,
     loginSuccess,
-    handleError
+    handleError,
+    setUpApp,
+    logOut,
 } = createActions(
     'REGISTER',
     'REGISTER_SUCCESS',
     'LOGIN',
     'LOGIN_SUCCESS',
     'HANDLE_ERROR',
+    'SET_UP_APP',
+    'LOG_OUT'
 );
