@@ -9,6 +9,7 @@ function* registerSaga({payload}:Action<{name: string; email: string; password: 
     try {
         // @ts-ignore
         const { token, user }: IUserResponse = yield call(registerUser, {name: payload.name, email: payload.email, password: payload.password});
+        localStorage.setItem('token', token);
         yield put(registerSuccess({token, user}));
     } catch (error) {
         yield put(handleError({error}));
