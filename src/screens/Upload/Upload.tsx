@@ -1,15 +1,13 @@
 import React, {useCallback, useState} from 'react';
 import Layout from '../../components/Layout/Layout';
-
-import styles from './Upload.module.css';
-import { Button } from 'antd';
+import logo from '../../assets/upload-cloud.png';
 import { Upload } from 'antd';
-import axios from '../../api/axios';
+import { IFile } from "../../store/files/reducer";
 
 const { Dragger } = Upload;
 
 const UploadFile: React.FC = () => {
-    const [file, setFile] = useState<unknown>(null);
+    const [uploaded, setUploaded] = useState<IFile[]>([]);
     const onFileUploadChange = useCallback((info) => {
         const { status } = info.file;
         if (status !== 'uploading') {
@@ -17,34 +15,58 @@ const UploadFile: React.FC = () => {
         }
         if (status === 'done') {
             console.log(`${info.file.name} file uploaded successfully.`);
-            setFile(info.file);
+            console.log(info.file.response);
+            setUploaded([...uploaded, info.file.response.newFile as IFile])
         } else if (status === 'error') {
             console.log(`${info.file.name} file upload failed.`);
-            setFile(null);
         }
-    }, []);
-
-    // const onUploadClick = useCallback(async () => {
-    //     if (!file) {
-    //         return;
-    //     }
-    //     const formData = new FormData();
-    //     // @ts-ignore
-    //     formData.append('file', file);
-    //     const response = await axios.post('/files', formData );
-    //     console.log(response);
-    // }, [file]);
+    }, [uploaded]);
 
     return (
         <Layout>
         <section>
-            <p>Title</p>
+            <h1>Upload files below</h1>
             <Dragger
                 multiple={false}
                 headers={{ authorization: localStorage.getItem('token') as string}}
                 action={process.env.REACT_APP_BASE_URL + 'files'}
                 onChange={onFileUploadChange}
-            />
+                listType={'picture'}
+            >
+                <div>
+                    <img src={logo} alt={'Logo'} width={200} style={{ filter: 'grayscale(100%)', opacity: 0.2 }}/>
+                    <div style={{ fontSize: 20, color: '#1890ff', marginTop: 10 }}>Click here or drag files</div>
+                </div>
+            </Dragger>
+            {
+                uploaded.length > 0 && (
+                    <div style={{ marginTop: 25 }}>
+                        <h1>Recently uploaded files</h1>
+                        {
+                            uploaded.map((file) => (
+                                <div style={{
+                                    display: 'grid',
+                                    backgroundColor: '#fafafa',
+                                    marginTop: 10,
+                                    borderRadius: 5,
+                                    border: '1px dashed #d9d9d9',
+                                    padding: 20,
+                                }}>
+                                    <div style={{ margin: 0 }}>{file.fileName}</div>
+                                    <a
+                                        href={process.env.REACT_APP_BASE_URL + file.downloadLink}
+                                        rel={'noopener noreferrer'}
+                                        target={'_blank'}
+                                        style={{ color: '#1890ff' }}
+                                    >
+                                        {process.env.REACT_APP_BASE_URL + file.downloadLink}
+                                    </a>
+                                </div>
+                            ))
+                        }
+                    </div>
+                )
+            }
         </section>
         </Layout>
     )

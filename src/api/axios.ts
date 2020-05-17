@@ -1,10 +1,9 @@
 import axios from 'axios';
 import IServerError from '../interfaces/IServerError';
-import {config} from 'dotenv';
 
 const instance = axios.create({
     baseURL: process.env.REACT_APP_BASE_URL,
-    timeout: 1000,
+    timeout: 10000,
     headers: {'X-Custom-Header': 'foobar'},
 });
 

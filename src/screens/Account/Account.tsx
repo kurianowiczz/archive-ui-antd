@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Layout from '../../components/Layout/Layout';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {IGlobalState} from '../../store';
+import { fetchFiles } from '../../store/files/actions';
+import FileList from "../../components/FileList/FileList";
 
 const Account: React.FC = () => {
-
+    const dispatch = useDispatch();
     const user = useSelector((state: IGlobalState) => state.users.user);
+
+    useEffect(() => {
+        dispatch(fetchFiles());
+    }, [dispatch]);
+
+    const files = useSelector((state: IGlobalState) => state.files.files);
 
     return (
         <Layout>
@@ -16,11 +24,11 @@ const Account: React.FC = () => {
                     </div>
                 ) : (
                     <div>
-                        loading
+                        Loading...
                     </div>
                 )
             }
-
+            <FileList files={files} />
         </Layout>
     )
 };

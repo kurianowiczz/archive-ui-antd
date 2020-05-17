@@ -15,3 +15,11 @@ export const loginUser = async (email: string, password: string): Promise<{ toke
 export const getMe = async () => {
     return axios.get('/users/me');
 };
+
+export const getAll = async () => {
+    return axios.get('/users/all');
+};
+
+export const toggleBan = async (id: string) => {
+    return axios.post('/users/ban', { id });
+};

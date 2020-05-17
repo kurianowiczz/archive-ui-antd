@@ -1,9 +1,8 @@
-import { call, fork, put } from 'redux-saga/effects';
+import { fork } from 'redux-saga/effects';
 import users from './users/saga';
-import { getMe } from '../api/users';
-import { loginSuccess, handleError } from './users/actions';
+import files from './files/saga';
 
 export default function* (): Generator { //функция генератор
-
     yield fork(users);
+    yield fork(files);
 };
